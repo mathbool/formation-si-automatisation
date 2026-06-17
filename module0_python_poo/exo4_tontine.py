@@ -45,8 +45,7 @@ class MembreVIP(Membre):
         super().__init__(nom, telephone)
         self.plafond_pret = plafond_pret
         self.prets_en_cours = [] #prets_en_cours
-
-
+        
     def demander_pret(self, montant):
         #accepte si montant <= plafond_pret
         if montant <= self.plafond_pret:
@@ -61,14 +60,44 @@ class MembreVIP(Membre):
         if mois not in self.historique_cotisations:
             self.historique_cotisations[mois] = []
         self.historique_cotisations[mois].append(dat_hist)
+
+class Tontine:
+
+    def __init__(self):
+        self.liste_membres = []
+        self.mois_tontine = []
+
+    def ajouter_membre(self, membre):
+        if not membre in self.liste_membres:
+            self.liste_membres.append(membre)
+
+    def pot_disponible(self):
+        pd = 0
+        for elem in self.liste_membres:
+            pd += elem.total_cotiser() #(nom)
+        return pd
     
+    def ordre_reception_pot(self):
+        print(f"Pot disponible : {self.pot_disponible()}")
+        print("Ordre de recetion : ")
+        print("nom - montant - Total - reste global")
+        t , n = 0, 0
+        for elem in self.liste_membres:
+            a_cotise = elem.total_cotiser() #(nom)
+            t += a_cotise
+            n += 1
+            print(f"{str(elem.nom)} - {n}x{elem.montant} - {a_cotise} - {self.pot_disponible() - t }")
+
 
 Fotso = Membre("Fotso", "23547878")
+Tontine_douala = Tontine()
+Tontine_douala.ajouter_membre(Fotso)
 Fotso.cotiser("janvier")
 
 Fotso.cotiser("mars")
 
 Nana = MembreVIP("Nana", "4578965", 50000)
+Tontine_douala.ajouter_membre(Nana)
 Nana.cotiser("janvier")
 Fotso.cotiser("janvier")
 
@@ -84,3 +113,6 @@ print("\nTotal cotiser")
 
 print(Fotso.total_cotiser())
 print(Nana.total_cotiser())
+
+Tontine_douala.ordre_reception_pot()
+

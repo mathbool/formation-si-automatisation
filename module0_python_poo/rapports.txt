@@ -1,0 +1,5 @@
+1 - 2026-06-17 10:59:39.489846 - {'code_produit': 'ART-123A', 'prix': 250, 'quantite': 2}
+2 - 2026-06-17 10:59:39.490085 - Erreur : Quantité invalide !
+3 - 2026-06-17 10:59:39.490180 - Erreur : Prix non valide !
+4 - 2026-06-17 10:59:39.490272 - {'code_produit': 'ART-423A', 'prix': 250, 'quantite': 2}
+5 - 2026-06-17 10:59:39.490406 - Erreur : Format code incorrecte : ART-XXXX
